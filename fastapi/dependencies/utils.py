@@ -775,9 +775,9 @@ def request_params_to_args(
             # If headers are in a Pydantic model, the way to disable convert_underscores
             # would be with Header(convert_underscores=False) at the Pydantic model level
             convert_underscores = getattr(
-                field.field_info, 
-                "convert_underscores", 
-                getattr(base_field.field_info, "convert_underscores", True)
+                field.field_info,
+                "convert_underscores",
+                getattr(base_field.field_info, "convert_underscores", True),
             )
             if convert_underscores:
                 alias = (
@@ -797,9 +797,9 @@ def request_params_to_args(
 
     for field in fields:
         field_info = field.field_info
-        assert isinstance(
-            field_info, params.Param
-        ), "Params must be subclasses of Param"
+        assert isinstance(field_info, params.Param), (
+            "Params must be subclasses of Param"
+        )
 
         if lenient_issubclass(field.type_, BaseModel):
             value = params_to_process
